@@ -20,9 +20,10 @@ void gdump(unsigned int tag, ...) {
 		size_t len = va_arg(ap, size_t);
 		printf("secret: ");
 		fflush(stdout);
-		FILE* bout = popen("base32", "w");
+		FILE* bout = popen("base32 --wrap=0", "w");
 		fwrite(buf, len, 1, bout);
 		pclose(bout);
+		printf("\n");
 		break;
 	}
 	case 0x12:		// field 2 bytes => name
